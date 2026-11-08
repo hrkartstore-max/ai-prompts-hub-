@@ -1,0 +1,1 @@
+import {redirect} from "next/navigation";import {isAdmin} from "@/lib/admin-auth";import AdminUsers from "@/components/AdminUsers";export const dynamic="force-dynamic";export default async function UsersPage(){if(!await isAdmin())redirect("/admin/login");return <AdminUsers/>}
