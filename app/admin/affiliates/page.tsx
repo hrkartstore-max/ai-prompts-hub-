@@ -1,0 +1,2 @@
+import {isAdmin} from "@/lib/admin-auth";import {redirect} from "next/navigation";import AffiliateManager from "@/components/AffiliateManager";
+export default async function AdminAffiliatesPage(){if(!await isAdmin())redirect("/admin/login");return <AffiliateManager/>}
