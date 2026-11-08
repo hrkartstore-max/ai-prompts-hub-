@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server";import {connectDB} from "@/lib/mongodb";import Prompt from "@/models/Prompt";import {prompts as seedPrompts} from "@/lib/data";
+export const dynamic="force-dynamic";export async function GET(){try{await connectDB();const rows=await Prompt.find({status:"published"}).sort({createdAt:-1}).lean();const data=rows.length?rows:seedPrompts;return NextResponse.json(data.map((p:any)=>({...p,id:String(p._id||p.id)})))}catch{return NextResponse.json(seedPrompts)}}
