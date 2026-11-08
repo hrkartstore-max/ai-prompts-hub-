@@ -1,0 +1,3 @@
+import {Schema,models,model} from "mongoose";
+const PaymentOrderSchema=new Schema({userId:{type:Schema.Types.ObjectId,ref:"User",required:true,index:true},razorpayOrderId:{type:String,required:true,unique:true,index:true},razorpayPaymentId:{type:String,default:""},amount:{type:Number,required:true},currency:{type:String,default:"INR"},plan:{type:String,enum:["pro_monthly"],default:"pro_monthly"},status:{type:String,enum:["created","paid","failed"],default:"created",index:true},paidAt:{type:Date,default:null}},{timestamps:true});
+export default models.PaymentOrder||model("PaymentOrder",PaymentOrderSchema);
