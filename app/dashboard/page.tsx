@@ -1,0 +1,3 @@
+import {redirect} from "next/navigation";import Link from "next/link";import {getCurrentUser} from "@/lib/user-auth";import DashboardClient from "@/components/DashboardClient";
+export const dynamic="force-dynamic";
+export default async function DashboardPage(){const user=await getCurrentUser();if(!user)redirect("/login");return <div className="container py-12"><p className="text-sm font-bold uppercase tracking-widest text-violet-600">Your workspace</p><h1 className="mt-2 text-3xl font-black">Hello{user.name?" "+user.name:""} 👋</h1><p className="mt-2 text-slate-500">Your saved prompts, all in one place.</p><DashboardClient email={user.email}/></div>}
