@@ -1,0 +1,5 @@
+import {cookies} from "next/headers";import {SignJWT,jwtVerify} from "jose";import User from "@/models/User";import {connectDB} from "@/lib/mongodb";
+const cookieName="promptspace_user";function secret(){const value=process.env.USER_JWT_SECRET||process.env.ADMIN_JWT_SECRET;if(!value||value.length<32)throw new Error("Configure USER_JWT_SECRET (32+ characters) or ADMIN_JWT_SECRET.");return new TextEncoder().encode(value)}
+export async function createUserSession(userId:string){return new SignJWT({sub:userId,role:"user"}).setProtectedHeader({alg:"HS256"}).setIssuedAt().setExpirationTime("30d").sign(secret())}
+export async function getCurrentUser(){try{const token=(await cookies()).get(cookieName)?.value;if(!token)return null;const {payload}=await jwtVerify(token,secret());if(!payload.sub||payload.role!=="user")return null;await connectDB();return await User.findById(payload.sub).select("_id email name bookmarks createdAt").lean()}catch{return null}}
+export const userCookieName=cookieName;
