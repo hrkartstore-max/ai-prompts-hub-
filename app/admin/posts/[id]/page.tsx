@@ -1,0 +1,1 @@
+import {isAdmin} from "@/lib/admin-auth";import {redirect} from "next/navigation";import ContentEditor from "@/components/ContentEditor";export const dynamic="force-dynamic";export default async function EditPost({params}:{params:Promise<{id:string}>}){if(!await isAdmin())redirect("/admin/login");const {id}=await params;return <ContentEditor kind="posts" id={id}/ >}
