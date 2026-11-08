@@ -1,3 +1,3 @@
 import {Schema,models,model} from "mongoose";
-const UserSchema=new Schema({email:{type:String,required:true,unique:true,lowercase:true,trim:true,index:true},passwordHash:{type:String,required:true,select:false},name:{type:String,trim:true,default:""},bookmarks:[{type:Schema.Types.ObjectId,ref:"Prompt"}],role:{type:String,enum:["user","admin"],default:"user"}},{timestamps:true});
+const UserSchema=new Schema({email:{type:String,required:true,unique:true,lowercase:true,trim:true,index:true},passwordHash:{type:String,required:true,select:false},name:{type:String,trim:true,default:""},bookmarks:[{type:Schema.Types.ObjectId,ref:"Prompt"}],role:{type:String,enum:["user","admin"],default:"user"},proExpiresAt:{type:Date,default:null},membershipPlan:{type:String,enum:["free","pro"],default:"free"}},{timestamps:true});
 export default models.User||model("User",UserSchema);
