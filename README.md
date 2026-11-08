@@ -31,7 +31,7 @@ Visit `/admin/login`. Manage prompts, blog articles and affiliate recommendation
 - Members can save and remove published prompts from the prompt library.
 - Passwords are hashed with bcrypt; sessions are signed, HTTP-only cookies.
 - Bookmarks are stored per user in MongoDB and are not exposed publicly.
-- Email verification, password reset, social login, email verification, password reset, social login and account deletion are not included yet. Pro membership is available in V6.
+- Email verification, password reset, social login and account deletion are not included yet. Pro membership is available in V6.
 
 ## Promptspace Pro (V6)
 - Pricing page: `/pricing`; current starter plan is ₹499 for 30 days.
