@@ -1,6 +1,6 @@
 # Promptspace — AI Prompts Hub
 
-A Next.js 15 platform with an AI prompt library, tools directory, editorial blog, admin CMS, affiliate recommendations and member accounts.
+A Next.js 15 platform with an AI prompt library, tools directory, editorial blog, admin CMS, affiliate recommendations member accounts and paid Pro membership.
 
 ## Stack
 - Next.js 15 App Router, React 19, TypeScript, Tailwind CSS
@@ -31,7 +31,15 @@ Visit `/admin/login`. Manage prompts, blog articles and affiliate recommendation
 - Members can save and remove published prompts from the prompt library.
 - Passwords are hashed with bcrypt; sessions are signed, HTTP-only cookies.
 - Bookmarks are stored per user in MongoDB and are not exposed publicly.
-- Email verification, password reset, social login, paid tiers and account deletion are not included yet.
+- Email verification, password reset, social login, email verification, password reset, social login and account deletion are not included yet. Pro membership is available in V6.
+
+## Promptspace Pro (V6)
+- Pricing page: `/pricing`; current starter plan is ₹499 for 30 days.
+- Admins can mark prompts as Pro-only in the prompt editor. The public prompt API withholds locked prompt text unless the signed-in member has an active entitlement.
+- Razorpay order creation and signature verification run server-side. A signed webhook handles `payment.captured` events idempotently.
+- Add `NEXT_PUBLIC_RAZORPAY_KEY_ID`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` and `RAZORPAY_WEBHOOK_SECRET` to Vercel. Configure the webhook URL as `https://YOUR_DOMAIN/api/payments/webhook` and subscribe to `payment.captured`.
+- Set the webhook secret in both Razorpay and Vercel. Never expose `RAZORPAY_KEY_SECRET` or `RAZORPAY_WEBHOOK_SECRET` in a `NEXT_PUBLIC_` variable.
+- Checkout is not live until Razorpay credentials and webhook are configured and tested in test mode. No recurring auto-renewal is implemented; this is a one-time 30-day membership purchase.
 
 ## Affiliate recommendations
 - Public directory: `/affiliates`; admin manager: `/admin/affiliates`.
@@ -49,4 +57,4 @@ Visit `/admin/login`. Manage prompts, blog articles and affiliate recommendation
 - Add rate limiting / abuse protection to login, registration and write endpoints before public launch.
 - Add email verification and password reset before treating accounts as production identity accounts.
 - Review privacy, terms, cookie consent, affiliate disclosures and advertising policies before monetization.
-- Payment processing, paid memberships, digital delivery, AdSense integration and affiliate conversion tracking require further implementation and relevant provider accounts.
+- Digital product delivery, AdSense integration and affiliate conversion tracking require further implementation and relevant provider accounts. Test Razorpay payments and webhook delivery before accepting live payments.
