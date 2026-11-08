@@ -1,0 +1,3 @@
+import {Schema,models,model} from "mongoose";
+const AffiliateProductSchema=new Schema({name:{type:String,required:true,trim:true,maxlength:160},slug:{type:String,required:true,unique:true,index:true},description:{type:String,required:true,maxlength:500},category:{type:String,required:true},imageUrl:{type:String,default:""},merchant:{type:String,required:true},affiliateUrl:{type:String,required:true},disclosure:{type:String,default:"We may earn a commission from qualifying purchases."},featured:{type:Boolean,default:false},status:{type:String,enum:["draft","published"],default:"draft",index:true}},{timestamps:true});
+export default models.AffiliateProduct||model("AffiliateProduct",AffiliateProductSchema);
