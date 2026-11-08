@@ -1,3 +1,3 @@
-import {NextResponse} from "next/server";import connectDB from "@/lib/mongodb";import AffiliateProduct from "@/models/AffiliateProduct";
+import {NextResponse} from "next/server";import {connectDB} from "@/lib/mongodb";import AffiliateProduct from "@/models/AffiliateProduct";
 export const dynamic="force-dynamic";
 export async function GET(){try{await connectDB();const products=await AffiliateProduct.find({status:"published"}).sort({featured:-1,createdAt:-1}).lean();return NextResponse.json(products)}catch{return NextResponse.json([])}}
