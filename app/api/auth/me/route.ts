@@ -1,2 +1,2 @@
-import {NextResponse} from "next/server";import {getCurrentUser} from "@/lib/user-auth";
-export async function GET(){const user=await getCurrentUser();if(!user)return NextResponse.json({user:null});return NextResponse.json({user:{id:String(user._id),email:user.email,name:user.name,bookmarkCount:user.bookmarks?.length||0}})}
+import {NextResponse} from "next/server";import {getCurrentUser} from "@/lib/user-auth";import {connectDB} from "@/lib/mongodb";import User from "@/models/User";import {hasActivePro} from "@/lib/membership";
+export async function GET(){const user=await getCurrentUser();if(!user)return NextResponse.json({user:null});await connectDB();const account=await User.findById(user._id).select("membershipPlan proExpiresAt");return NextResponse.json({user:{id:String(user._id),email:user.email,name:user.name,bookmarkCount:user.bookmarks?.length||0,isPro:hasActivePro(account)}})}
