@@ -1,0 +1,2 @@
+export function hasActivePro(user:any){return Boolean(user?.membershipPlan==="pro"&&user?.proExpiresAt&&new Date(user.proExpiresAt).getTime()>Date.now())}
+export const PRO_PLAN={id:"pro_monthly",name:"Promptspace Pro",amountPaise:49900,currency:"INR",durationDays:30};
