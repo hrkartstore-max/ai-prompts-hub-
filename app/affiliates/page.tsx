@@ -1,4 +1,4 @@
-import type {Metadata} from "next";import connectDB from "@/lib/mongodb";import AffiliateProduct from "@/models/AffiliateProduct";import Link from "next/link";
+import type {Metadata} from "next";import {connectDB} from "@/lib/mongodb";import AffiliateProduct from "@/models/AffiliateProduct";import Link from "next/link";
 export const metadata:Metadata={title:"Recommended AI Tools & Resources",description:"Explore useful AI tools and resources selected by Promptspace."};
 export const dynamic="force-dynamic";
 async function getProducts(){try{await connectDB();return await AffiliateProduct.find({status:"published"}).sort({featured:-1,createdAt:-1}).lean()}catch{return []}}
