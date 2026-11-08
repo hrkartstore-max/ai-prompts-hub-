@@ -1,0 +1,1 @@
+import {isAdmin} from "@/lib/admin-auth";import {redirect} from "next/navigation";import ContentEditor from "@/components/ContentEditor";export const dynamic="force-dynamic";export default async function NewPost(){if(!await isAdmin())redirect("/admin/login");return <ContentEditor kind="posts"/>}
