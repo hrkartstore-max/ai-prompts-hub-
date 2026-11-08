@@ -1,6 +1,6 @@
 # Promptspace — AI Prompts Hub
 
-A Next.js 15 platform with an AI prompt library, tools directory, editorial blog, admin CMS, affiliate recommendations member accounts and paid Pro membership.
+A Next.js 15 platform with an AI prompt library, tools directory, editorial blog, admin CMS, affiliate recommendations, member accounts, paid Pro membership and admin analytics.
 
 ## Stack
 - Next.js 15 App Router, React 19, TypeScript, Tailwind CSS
@@ -40,6 +40,12 @@ Visit `/admin/login`. Manage prompts, blog articles and affiliate recommendation
 - Add `NEXT_PUBLIC_RAZORPAY_KEY_ID`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` and `RAZORPAY_WEBHOOK_SECRET` to Vercel. Configure the webhook URL as `https://YOUR_DOMAIN/api/payments/webhook` and subscribe to `payment.captured`.
 - Set the webhook secret in both Razorpay and Vercel. Never expose `RAZORPAY_KEY_SECRET` or `RAZORPAY_WEBHOOK_SECRET` in a `NEXT_PUBLIC_` variable.
 - Checkout is not live until Razorpay credentials and webhook are configured and tested in test mode. No recurring auto-renewal is implemented; this is a one-time 30-day membership purchase.
+
+## Admin analytics and user management (V7)
+- Admin analytics: `/admin/analytics` shows account totals, active Pro members, paid INR order totals, prompt views/copies, top prompts and recent registrations.
+- User management: `/admin/users` lists the latest 100 accounts and lets admins grant 30 days of Pro access or revoke Pro access.
+- Prompt card impressions are counted when the prompt library loads; copy actions increment prompt copy counters. Counts start from V7 and are not retroactive.
+- Analytics endpoints are admin-protected except the small prompt event endpoint. Add rate limiting or bot filtering before relying on these counters for business reporting.
 
 ## Affiliate recommendations
 - Public directory: `/affiliates`; admin manager: `/admin/affiliates`.
